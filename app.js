@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const stuffRoutes = require("./routes/stuff");
+const userProfileRoutes = require("./routes/userProfile");
 // const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
 const bodyParser = require("body-parser");
@@ -27,15 +27,12 @@ app.use(
   })
 );
 mongoose
-  .connect(
-    "mongodb+srv://loulou:testDB2021@testdb.hqoad.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 app.use("/images", express.static(path.join(__dirname, "images")));
-app.use("/api/stuff", stuffRoutes);
+app.use("/api/userProfile", userProfileRoutes);
 app.use("/api/auth", userRoutes);
 // app.use("/api/product", productRoutes);
 module.exports = app;
