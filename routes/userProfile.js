@@ -9,7 +9,7 @@ const multer = require("../middleware/multer-config");
 // il y aura des enregistrements d'images sans que la requête soit authentifiée
 router.post("/", auth, multer, userProfileCtrl.createUserProfile);
 router.get("/:userId", auth, userProfileCtrl.getUserProfile);
-router.put("/:id", auth, multer, userProfileCtrl.modifyUserProfile);
+router.put("/:userId", auth, multer, userProfileCtrl.modifyUserProfile);
 router.delete("/:id", auth, userProfileCtrl.deleteUserProfile);
 
 module.exports = router;

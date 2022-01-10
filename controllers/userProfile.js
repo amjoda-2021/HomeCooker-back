@@ -39,16 +39,16 @@ exports.getUserProfile = (req, res, next) => {
 };
 
 exports.modifyUserProfile = (req, res, next) => {
-  console.log(req);
-  UserProfile.findOne({ _id: req.params.id }).then((userProfile) => {
+  console.log("yoyoyoyo");
+  UserProfile.findOne({ userId: req.params.userId }).then((userProfile) => {
     if (!userProfile) {
       return res.status(404).json({
-        error: "No such Thing!",
+        error: "Aucunes informations trouvées ! ",
       });
     }
     if (userProfile.userId !== req.auth.userId) {
       return res.status(401).json({
-        error: "Unauthorized request!",
+        error: "Aucunes informations trouvées ! ",
       });
     }
 
@@ -61,21 +61,27 @@ exports.modifyUserProfile = (req, res, next) => {
         }
       : { ...req.body };
     UserProfile.updateOne(
-      { _id: req.params.id },
-      { ...thingObject, _id: req.params.id }
+      { userId: req.params.userId },
+      { ...userProfileObject, userId: req.params.userId }
     )
-      .then(() =>
-        res
-          .status(200)
-          .json(
-            req.file
-              ? `${req.protocol}://${req.get("host")}/images/${
-                  req.file.filename
-                }`
-              : { message: "Objet modifié !" }
-          )
-      )
-      .catch((error) => res.status(400).json({ error }));
+      .then(() => {
+        console.log(userProfile);
+        res.status(200).json(
+          req.file
+            ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+            : {
+                message:
+                  "Les modifications ont bien été prises en compte &#128522;",
+                userProfile,
+              }
+        );
+      })
+      .catch((error) =>
+        res.status(400).json({
+          error:
+            "Nous ne pouvons pas modifié tes informations. Problème technique ! ",
+        })
+      );
   });
 };
 
