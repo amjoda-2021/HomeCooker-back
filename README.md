@@ -23,6 +23,13 @@
 - npm install 
 - npm run dev 
 
+- Have to add config vars to your .env : 
+  - BASE_URL = ""
+  - DB = "" => MangoDB url with auth (you have to create MangoDB account to have a valid URL for database connection
+  - PATH = "SENGRID_API_KEY" NodeMailer
+  - SERVICE= 'SendGrid' for NodeMailer with Sendgrid
+  - TOKEN_KEY= "" String for JWT-Token signature
+
 # To use the online API in front : 
 
 - Online app API: https://home-cooker-back.herokuapp.com/
