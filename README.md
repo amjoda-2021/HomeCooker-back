@@ -11,6 +11,9 @@
 - Model for User (auth : email & encrypted password Bcrypt)
 - Model with modular attributes for the UserProfile 
 
+# Model validation JOI
+- JOI validation for User Model & UserProfile Model
+
 # Multer
 - Image Managament (multer) for UserProfile avatar (create, update)
 
